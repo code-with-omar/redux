@@ -146,6 +146,9 @@ store.dispatch(resetCounter());
 ```
 
 ## 3 Payload
+
+If an action requires extra data (e.g., a value to increment by or a new user to add), that data is passed through the payload field.
+
 ```javascript
 const { createStore } = require("redux");
 
@@ -220,4 +223,47 @@ store.dispatch(incrementCounterByValue(5));
 store.dispatch(incrementCounterByValue(20));
 // store.dispatch(decrementCounter());
 // store.dispatch(resetCounter());
+```
+
+## 3.1 Payload
+``` javascript 
+const { createStore } = require("redux");
+
+const ADD_USER = "ADD_USER"
+
+const initialUser = {
+    users: ["Omar"],
+    count: 1,
+};
+
+const addUser = (user) => {
+    return {
+        type: ADD_USER,
+        payload: user,
+    };
+};
+
+
+
+const addUserReducer = (state = initialUser, action) => {
+    switch (action.type) {
+        case ADD_USER:
+            return {
+                users: [...state.users, action.payload],
+                count: state.count + 1,
+            };
+        default:
+            state;
+    }
+};
+
+const store = createStore(addUserReducer);
+
+store.subscribe(() => {
+    console.log(store.getState());
+});
+
+
+store.dispatch(addUser("faruk"));
+store.dispatch(addUser("Motin"));
 ```

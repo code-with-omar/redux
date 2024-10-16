@@ -1,73 +1,39 @@
 const { createStore } = require("redux");
 
-const INCREMENT = "INCREMENT";
-const INCREMENT_BY_VALUE = "INCREMENT_BY_VALUE";
-const DECREMENT = "DECREMENT";
-const RESET = "RESET";
+const ADD_USER = "ADD_USER"
 
-const initialCounterState = {
-    count: 0,
+const initialUser = {
+    users: ["Omar"],
+    count: 1,
 };
 
-const incrementCounter = () => {
+const addUser = (user) => {
     return {
-        type: INCREMENT,
-    };
-};
-const incrementCounterByValue = (value) => {
-    return {
-        type: INCREMENT_BY_VALUE,
-        payload: value
-    };
-};
-const decrementCounter = () => {
-    return {
-        type: DECREMENT,
-    };
-};
-const resetCounter = () => {
-    return {
-        type: RESET,
+        type: ADD_USER,
+        payload: user,
     };
 };
 
-const counterReducer = (state = initialCounterState, action) => {
+
+
+const addUserReducer = (state = initialUser, action) => {
     switch (action.type) {
-        case INCREMENT:
+        case ADD_USER:
             return {
-                ...state,
+                users: [...state.users, action.payload],
                 count: state.count + 1,
             };
-        case DECREMENT:
-            return {
-                ...state,
-                count: state.count - 1,
-            };
-        case INCREMENT_BY_VALUE:
-            return {
-                ...state,
-                count: state.count + action.payload
-            };
-        case RESET:
-            return {
-                ...state,
-                count: 0,
-            };
-
         default:
             state;
     }
 };
 
-const store = createStore(counterReducer);
+const store = createStore(addUserReducer);
 
 store.subscribe(() => {
     console.log(store.getState());
 });
 
-// store.dispatch(incrementCounter());
-// store.dispatch(incrementCounter());
-store.dispatch(incrementCounterByValue(5));
-store.dispatch(incrementCounterByValue(20));
-// store.dispatch(decrementCounter());
-// store.dispatch(resetCounter());
+
+store.dispatch(addUser("faruk"));
+store.dispatch(addUser("Motin"));
