@@ -5,6 +5,7 @@ const ADD_USER = "Hossain"
 //State
 const initialCounterState = {
     count: 0,
+    name: "JavaScript"
 }
 
 const initialUserState = {
@@ -31,7 +32,26 @@ const addUser = (user) => {
     }
 }
 
+// create reducer for counter
 
+const counterReducer = (state = initialUserState, action) => {
+    switch (action.type) {
+        case INCREMENT:
+            return {
+                ...state,
+                count: state.count + 1
+            }
+        case DECREMENT:
+            return {
+                ...state,
+                count: state.count - 1
+            }
+        default:
+            state
+            break;
+
+    }
+}
 // 1. State
 // 2. dispatch (action create korte hoy)
 // 3. reducer (action er type er upor kaj kore)
