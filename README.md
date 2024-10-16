@@ -1,18 +1,4 @@
-# Redux Counter Example
 
-This is a simple project that demonstrates the basic usage of Redux for state management in JavaScript. The project includes an example of a counter application where you can increment and decrement a count value. It also shows how to create actions, reducers, and a store using Redux.
-
-## Features
-
-- **Increment Counter**: Increase the count value by 1.
-- **Decrement Counter**: Decrease the count value by 1.
-- **Add User Action Example**: An action example that simulates adding a user to the state (though not implemented in the current reducer).
-
-## Getting Started
-
-### Prerequisites
-
-To run this project, you'll need Node.js installed on your machine.
 
 ### Installation
 
@@ -60,10 +46,82 @@ The following actions are available in this project:
 - `DECREMENT`: Decreases the count value by 1.
 - `ADD_USER`: Adds a user to the state (this action is defined but not implemented in the current reducer).
 
-## Example Code
-
-Here is an example of how to dispatch an action:
+## Core concept
+i. defining constants
 
 ```javascript
-store.dispatch(incrementCounter());
-store.dispatch(decrementCounter());
+const INCREMENT = "INCREMENT"
+const DECREMENT = "DECREMENT"
+const ADD_USER = "Hossain"
+```
+ii.State define
+```javascript
+const initialCounterState = {
+    count: 0,
+    name: "JavaScript"
+}
+
+const initialUserState = {
+    users: [{
+        name: "Md. Omar Faruk"
+    }]
+}
+```
+iii.Action is a object-object may be two
+    1.One is type
+    2.payload
+```javascript
+    const incrementCounter = () => {
+    return {
+        type: INCREMENT
+    }
+}
+const decrementCounter = () => {
+    return {
+        type: DECREMENT
+    }
+}
+
+const addUser = (user) => {
+    return {
+        type: ADD_USER,
+        payload: user
+    }
+}
+```
+iv.Create reducer for counter
+```javascript
+const counterReducer = (state = initialCounterState, action) => {
+    switch (action.type) {
+        case INCREMENT:
+            return {
+                ...state,
+                count: state.count + 1
+            }
+        case DECREMENT:
+            return {
+                ...state,
+                count: state.count - 1
+            }
+        default:
+            state
+            break;
+
+    }
+}
+```
+v. createStore method is create for hold out state. That are have three important method
+    1. getState(): This method retrieves the current state of the store.
+    2. dispatch(): This is used to send actions to the store. 
+    3. subscribe(): This function allows you to listen for state changes. 
+```javascript
+const store = createStore(counterReducer)
+store.subscribe(() => {
+    console.log(store.getState())
+  
+})
+store.dispatch(incrementCounter())
+store.dispatch(incrementCounter())
+store.dispatch(incrementCounter())
+store.dispatch(decrementCounter())
+```
