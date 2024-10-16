@@ -1,3 +1,5 @@
+const { createStore } = require("redux")
+
 // defining constants
 const INCREMENT = "INCREMENT"
 const DECREMENT = "DECREMENT"
@@ -34,7 +36,7 @@ const addUser = (user) => {
 
 // create reducer for counter
 
-const counterReducer = (state = initialUserState, action) => {
+const counterReducer = (state = initialCounterState, action) => {
     switch (action.type) {
         case INCREMENT:
             return {
@@ -52,6 +54,16 @@ const counterReducer = (state = initialUserState, action) => {
 
     }
 }
+
+const store = createStore(counterReducer)
+store.subscribe(() => {
+    console.log(store.getState())
+  
+})
+store.dispatch(incrementCounter())
+store.dispatch(incrementCounter())
+store.dispatch(incrementCounter())
+store.dispatch(decrementCounter())
 // 1. State
 // 2. dispatch (action create korte hoy)
 // 3. reducer (action er type er upor kaj kore)
