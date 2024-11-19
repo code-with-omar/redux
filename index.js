@@ -5,6 +5,7 @@ const ADD_USER = "ADD_USER"
 const initialUser = {
     users: ["Omar"],
     count: 1,
+    hello:20
 };
 
 const addUser = (user) => {
