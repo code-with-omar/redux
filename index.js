@@ -37,3 +37,4 @@ store.subscribe(() => {
 
 store.dispatch(addUser("faruk"));
 store.dispatch(addUser("Motin"));
+store.dispatch(addUser("Rashed"))
